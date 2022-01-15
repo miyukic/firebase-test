@@ -1,5 +1,6 @@
-import firebase from 'firebase/app';
-import { getFirestore, collection, getDocs, Firestore } from 'firebase/firestore/lite';
+import firebase from 'firebase/compat/app';
+import { getFirestore, collection, getDocs, Firestore,
+    QuerySnapshot, CollectionReference, DocumentData } from 'firebase/firestore/lite';
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -10,12 +11,12 @@ const firebaseConfig = {
     appId: process.env.REACT_APP_FIREBASE_SENDER_ID,
 };
 
-const app = firebase.initializeApp(firebaseConfig);
-const db = getFirestore(app);
+export const app = firebase.initializeApp(firebaseConfig);
 
-async function getCities(db: Firestore) {
-    const citiesCol = collection(db, 'cities');
-    const citySnapshot = await getDocs(citiesCol);
-    const cityList = citySnapshot.docs.map(doc => doc.data());
-    return cityList;
-}
+//export async function getCities(db: Firestore) {
+//    const citiesCol: CollectionReference<DocumentData> = collection(db, 'cities');
+//    const p: Promise<QuerySnapshot<DocumentData>> = getDocs(citiesCol);
+//    const citySnapshot: QuerySnapshot<DocumentData> = await p;
+//    const cityList = citySnapshot.docs.map(doc => doc.data());
+//    return cityList;
+//}
