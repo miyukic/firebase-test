@@ -2,7 +2,7 @@
 // Reactルーター参考ページ
 
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react';
 import { app } from './MyFirebase';
 import { addDoc, collection, DocumentData, Firestore, getDocs, getFirestore, QuerySnapshot } from 'firebase/firestore/lite';
 
@@ -10,7 +10,6 @@ interface AppProps {
     children?: string;
 }
 
-const db: Firestore = getFirestore(app);
 
 //export async function getCities(db: Firestore) {
 //    const citiesCol = collection(db, 'cities');
@@ -24,8 +23,7 @@ const clickButton = () => {
     const id = '003'
     const name = 'test'
     const uid = ''
-
-    const db = getFirestore()
+    const db: Firestore = getFirestore(app);
     const docRef = addDoc(collection(db, 'tasks'), {
       uid: uid,
       id: id,
@@ -36,12 +34,19 @@ const clickButton = () => {
 
 const App = (props: AppProps) => {
     const [state, setState] = useState<string>();
+    const initText = "入力してください";
+    const [text, setText] = useState<string>(initText);
+    const changeEvent: ChangeEventHandler<HTMLInputElement> = (e: ChangeEvent<HTMLInputElement> | undefined): void => {
+        if (e == undefined) return;
+        setText(() => e.target.value)
+    }
     useEffect(() => {
     }, [])
     return (
         <>
-        <p>{state}</p>
+        <p>text:{text}</p>
         <button onClick={clickButton}>Firestore追加</button>
+        <p><input value={text} type="text" onChange={(e) => { return ;}}/></p>
         </>
     );
 }
