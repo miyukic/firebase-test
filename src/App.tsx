@@ -36,7 +36,9 @@ const App = (props: AppProps) => {
     const [state, setState] = useState<string>();
     const initText = "入力してください";
     const [text, setText] = useState<string>(initText);
-    const changeEvent: ChangeEventHandler<HTMLInputElement> = (e: ChangeEvent<HTMLInputElement> | undefined): void => {
+    type rt = ReturnType<ChangeEventHandler<HTMLInputElement>>;
+    type para = Parameters<ChangeEventHandler<HTMLInputElement>>
+    const changeEvent: ChangeEventHandler<HTMLInputElement> = (e: para[0]): rt => {
         if (e == undefined) return;
         setText(() => e.target.value)
     }
@@ -46,7 +48,7 @@ const App = (props: AppProps) => {
         <>
         <p>text:{text}</p>
         <button onClick={clickButton}>Firestore追加</button>
-        <p><input value={text} type="text" onChange={(e) => { return ;}}/></p>
+        <p><input value={text} type="text" onChange={changeEvent}/></p>
         </>
     );
 }
