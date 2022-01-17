@@ -53,7 +53,7 @@ const App = (props: AppProps) => {
     }
     */
     const changeEvent: ChangeEventHandler<HTMLInputElement> = (e: para[0]): rt => {
-        if (e == undefined) return;
+        if (e === undefined) return;
         setText(() => e.target.value)
     }
     useEffect(() => {
