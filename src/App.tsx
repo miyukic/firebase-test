@@ -2,7 +2,7 @@
 // Reactルーター参考ページ
 
 import './App.css';
-import React, { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react';
+import React, { ChangeEvent, ChangeEventHandler, Props, useEffect, useState } from 'react';
 import { app } from './MyFirebase';
 import { addDoc, collection, DocumentData, Firestore, getDocs, getFirestore, QuerySnapshot } from 'firebase/firestore/lite';
 
@@ -32,7 +32,7 @@ const clickButton = () => {
     console.log('Document', docRef)
 }
 
-const App = (props: AppProps) => {
+const App: React.FC<AppProps> = (props: AppProps) => {
     const [state, setState] = useState<string>();
     const initText = "入力してください";
     const [text, setText] = useState<string>(initText);
@@ -53,8 +53,8 @@ const App = (props: AppProps) => {
     }
     */
     const changeEvent: ChangeEventHandler<HTMLInputElement> = (e: para[0]): rt => {
-        if (e === undefined) return;
-        setText(() => e.target.value)
+        //if (e === undefined) return;
+        setText(() => e?.target.value)
     }
     useEffect(() => {
     }, [])
