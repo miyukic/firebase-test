@@ -38,8 +38,8 @@ const App: React.FC<AppProps> = (props: AppProps) => {
     const [text, setText] = useState<string>(initText);
 
     type rt = ReturnType<ChangeEventHandler<HTMLInputElement>>;
-    //onChangeイベントハンドラの型から戻り値を取得できるはの最高！！
-    //だけど、onChangeの型を調べなければならないのが惜しい！
+    //onChangeイベントハンドラの型から戻り値を取得できるはの良い！
+    //だけど、onChangeの型をIDEの支援で調べなけれな使えないのが惜しい...
 
     //type rt2 = ReturnType<typeof onChange>;
     //イベントハンドラの名前から直接戻り値が取得できれば最高....！
@@ -54,8 +54,9 @@ const App: React.FC<AppProps> = (props: AppProps) => {
     */
     const changeEvent: ChangeEventHandler<HTMLInputElement> = (e: para[0]): rt => {
         //if (e === undefined) return;
-        setText(() => e?.target.value)
+        setText(() => e?.target.value);
     }
+
     useEffect(() => {
     }, [])
     return (
