@@ -2,7 +2,7 @@
 // Reactルーター参考ページ
 
 import './App.css';
-import React, { ChangeEvent, ChangeEventHandler, Props, useEffect, useState } from 'react';
+import React, { ChangeEvent, ChangeEventHandler, MouseEventHandler, Props, useEffect, useState } from 'react';
 import { app } from './MyFirebase';
 import { addDoc, collection, DocumentData, Firestore, getDocs, getFirestore, QuerySnapshot } from 'firebase/firestore/lite';
 
@@ -18,8 +18,10 @@ interface AppProps {
 //    const cityList = citySnapshot.docs.map(doc => doc.data());
 //    return cityList;
 //}
-
-const clickButton = () => {
+type onClickType = MouseEventHandler<HTMLButtonElement>;
+type para = Parameters<onClickType>;
+type rt = ReturnType<onClickType>;
+const clickButtonEvent: onClickType = (e: para[0]): rt => {
     const id = '003'
     const name = 'test'
     const uid = ''
@@ -37,14 +39,17 @@ const App: React.FC<AppProps> = (props: AppProps) => {
     const initText = "入力してください";
     const [text, setText] = useState<string>(initText);
 
-    type rt = ReturnType<ChangeEventHandler<HTMLInputElement>>;
+    type onClickType = ChangeEventHandler<HTMLInputElement>
+    // onClickイベントハンドラの型
+    type rt = ReturnType<onClickType>;
     //onChangeイベントハンドラの型から戻り値を取得できるはの良い！
     //だけど、onChangeの型をIDEの支援で調べなけれな使えないのが惜しい...
 
     //type rt2 = ReturnType<typeof onChange>;
     //イベントハンドラの名前から直接戻り値が取得できれば最高....！
 
-    type para = Parameters<ChangeEventHandler<HTMLInputElement>>;
+    type para = Parameters<onClickType>;
+    //onClickイベントハンドラの引数の型
 
     /*
     //onChangeの型
@@ -62,7 +67,7 @@ const App: React.FC<AppProps> = (props: AppProps) => {
     return (
         <>
         <p>text:{text}</p>
-        <button onClick={clickButton}>Firestore追加</button>
+        <button onClick={clickButtonEvent}>Firestore追加</button>
         <p><input value={text} type="text" onChange={changeEvent}/></p>
         </>
     );
