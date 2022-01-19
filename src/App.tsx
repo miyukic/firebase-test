@@ -2,7 +2,7 @@
 // Reactルーター参考ページ
 
 import './App.css';
-import React, { ChangeEvent, ChangeEventHandler, MouseEventHandler, Props, useEffect, useState } from 'react';
+import React, { ChangeEventHandler, MouseEventHandler, useEffect, useState } from 'react';
 import { app } from './MyFirebase';
 import { addDoc, collection, DocumentData, Firestore, getDocs, getFirestore, QuerySnapshot } from 'firebase/firestore/lite';
 
@@ -22,16 +22,16 @@ type onClickType = MouseEventHandler<HTMLButtonElement>;
 type para = Parameters<onClickType>;
 type rt = ReturnType<onClickType>;
 const clickButtonEvent: onClickType = (e: para[0]): rt => {
-    const id = '003'
-    const name = 'test'
-    const uid = ''
+    const uid = '';
+    const id = '003';
+    const name = 'test';
     const db: Firestore = getFirestore(app);
     const docRef = addDoc(collection(db, 'tasks'), {
       uid: uid,
       id: id,
       name: name
-    })
-    console.log('Document', docRef)
+    });
+    console.log('Document', docRef);
 }
 
 const App: React.FC<AppProps> = (props: AppProps) => {
@@ -63,6 +63,18 @@ const App: React.FC<AppProps> = (props: AppProps) => {
     }
 
     useEffect(() => {
+        // コレクションを取得
+        const usersCollectionRef = collection(getFirestore(app), "user1");
+        getDocs(usersCollectionRef).then( (querySnapshot) => {
+            console.log(querySnapshot)
+        }).catch (
+            (ex: unknown) => {
+                if (ex instanceof Error) {
+                    console.log("エラーです " + ex.message);
+                }
+            }
+        );
+
     }, [])
     return (
         <>
