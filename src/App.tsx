@@ -4,7 +4,7 @@
 import './App.css';
 import React, { ChangeEventHandler, MouseEventHandler, useEffect, useState } from 'react';
 import { app } from './MyFirebase';
-import { addDoc, collection, DocumentData, Firestore, getDocs, getFirestore, QuerySnapshot } from 'firebase/firestore/lite';
+import { addDoc, collection, DocumentData, Firestore, getDocs, getFirestore, QuerySnapshot, snapshotEqual } from 'firebase/firestore/lite';
 
 interface AppProps {
     children?: string;
@@ -66,12 +66,12 @@ const App: React.FC<AppProps> = (props: AppProps) => {
         // コレクションを取得
         const usersCollectionRef = collection(getFirestore(app), "user1");
         getDocs(usersCollectionRef).then( (querySnapshot) => {
-            console.log(querySnapshot)
-        }).catch (
-            (ex: unknown) => {
-                if (ex instanceof Error) {
-                    console.log("エラーです " + ex.message);
-                }
+            console.log(querySnapshot);
+        // }).catch(
+        //     (ex: unknown) => {
+        //         if (ex instanceof Error) {
+        //             console.log("エラーです " + ex.message);
+        //         }
             }
         );
 
