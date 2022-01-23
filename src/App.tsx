@@ -5,6 +5,7 @@ import './App.css';
 import React, { ChangeEventHandler, MouseEventHandler, useEffect, useState } from 'react';
 import { app } from './MyFirebase';
 import { addDoc, collection, DocumentData, Firestore, getDocs, getFirestore, QuerySnapshot, snapshotEqual } from 'firebase/firestore/lite';
+import SignUp from './Signup';
 
 interface AppProps {
     children?: string;
@@ -38,7 +39,7 @@ const App: React.FC<AppProps> = (props: AppProps) => {
     const [state, setState] = useState<string>();
     const initText = "入力してください";
     const [text, setText] = useState<string>(initText);
-    const [db, setDb] = useState<ReturnType<typeof getFirestore>>();
+    const [db, setDb] = useState<ReturnType<typeof collection>>();
 
     type onClickType = ChangeEventHandler<HTMLInputElement>
     // onClickイベントハンドラの型
@@ -82,6 +83,7 @@ const App: React.FC<AppProps> = (props: AppProps) => {
         <p>text:{text}</p>
         <button onClick={clickButtonEvent}>Firestore追加</button>
         <p><input value={text} type="text" onChange={changeEvent}/></p>
+        <SignUp />
         </>
     );
 }

@@ -13,6 +13,7 @@ const firebaseConfig = {
 };
 
 console.log("キー " + firebaseConfig.apiKey);
+
 console.log("process.env = " + process.env);
 
 
