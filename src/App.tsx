@@ -4,7 +4,7 @@
 import './App.css';
 import React, { ChangeEventHandler, MouseEventHandler, useEffect, useState } from 'react';
 import { app } from './MyFirebase';
-import { addDoc, collection, DocumentData, Firestore, getDocs, getFirestore, QuerySnapshot } from 'firebase/firestore/lite';
+import { addDoc, collection, DocumentData, Firestore, getDocs, getFirestore, QuerySnapshot, snapshotEqual } from 'firebase/firestore/lite';
 
 interface AppProps {
     children?: string;
@@ -38,6 +38,7 @@ const App: React.FC<AppProps> = (props: AppProps) => {
     const [state, setState] = useState<string>();
     const initText = "入力してください";
     const [text, setText] = useState<string>(initText);
+    const [db, setDb] = useState<>();
 
     type onClickType = ChangeEventHandler<HTMLInputElement>
     // onClickイベントハンドラの型
@@ -64,14 +65,14 @@ const App: React.FC<AppProps> = (props: AppProps) => {
 
     useEffect(() => {
         // コレクションを取得
-        const usersCollectionRef = collection(getFirestore(app), "user1");
+        const usersCollectionRef = colection(getFirestore(app), "user1");
         getDocs(usersCollectionRef).then( (querySnapshot) => {
-            console.log(querySnapshot)
-        }).catch (
-            (ex: unknown) => {
-                if (ex instanceof Error) {
-                    console.log("エラーです " + ex.message);
-                }
+            console.log(querySnapshot);
+        // }).catch(
+        //     (ex: unknown) => {
+        //         if (ex instanceof Error) {
+        //             console.log("エラーです " + ex.message);
+        //         }
             }
         );
 
