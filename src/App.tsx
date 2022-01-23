@@ -38,7 +38,7 @@ const App: React.FC<AppProps> = (props: AppProps) => {
     const [state, setState] = useState<string>();
     const initText = "入力してください";
     const [text, setText] = useState<string>(initText);
-    const [db, setDb] = useState<>();
+    const [db, setDb] = useState<ReturnType<typeof getFirestore>>();
 
     type onClickType = ChangeEventHandler<HTMLInputElement>
     // onClickイベントハンドラの型
@@ -65,7 +65,7 @@ const App: React.FC<AppProps> = (props: AppProps) => {
 
     useEffect(() => {
         // コレクションを取得
-        const usersCollectionRef = colection(getFirestore(app), "user1");
+        const usersCollectionRef = collection(getFirestore(app), "user1");
         getDocs(usersCollectionRef).then( (querySnapshot) => {
             console.log(querySnapshot);
         // }).catch(
