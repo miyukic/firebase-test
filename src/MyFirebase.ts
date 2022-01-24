@@ -18,6 +18,7 @@ console.log("process.env = " + process.env);
 
 
 export const app = firebase.initializeApp(firebaseConfig);
+export const auth = firebase.auth(app);
 
 //export async function getCities(db: Firestore) {
 //    const citiesCol: CollectionReference<DocumentData> = collection(db, 'cities');

@@ -1,4 +1,5 @@
 import { ChangeEventHandler, FormEventHandler, useState } from "react";
+import { auth } from "./MyFirebase"
 
 
 const SignUp = () => {
@@ -9,8 +10,10 @@ const SignUp = () => {
         e.preventDefault();
         console.log("メール: " + email);
         console.log("パスワード: " + pass);
-        console.log("登録");
+        if (email === undefined || pass === undefined) return;
+        auth.createUserWithEmailAndPassword(email, pass);
     }
+
     type para = Parameters<ChangeEventHandler<HTMLInputElement>>;
     const emailChangeEventHandler = (e: para[0]) => {
         setEmail( (x) => e.target.value);
