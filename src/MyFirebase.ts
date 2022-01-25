@@ -1,6 +1,7 @@
 import firebase from 'firebase/compat/app';
 import { getFirestore, collection, getDocs, Firestore,
     QuerySnapshot, CollectionReference, DocumentData } from 'firebase/firestore/lite';
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -12,13 +13,9 @@ const firebaseConfig = {
     measurementId: process.env.REACT_APP_MESUREMENT_ID
 };
 
-console.log("キー " + firebaseConfig.apiKey);
-
-console.log("process.env = " + process.env);
-
-
 export const app = firebase.initializeApp(firebaseConfig);
-export const auth = firebase.auth(app);
+export const auth = getAuth();
+
 
 //export async function getCities(db: Firestore) {
 //    const citiesCol: CollectionReference<DocumentData> = collection(db, 'cities');

@@ -1,3 +1,4 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ChangeEventHandler, FormEventHandler, useState } from "react";
 import { auth } from "./MyFirebase"
 
@@ -11,7 +12,7 @@ const SignUp = () => {
         console.log("メール: " + email);
         console.log("パスワード: " + pass);
         if (email === undefined || pass === undefined) return;
-        auth.createUserWithEmailAndPassword(email, pass);
+        createUserWithEmailAndPassword(auth, email, pass);
     }
 
     type para = Parameters<ChangeEventHandler<HTMLInputElement>>;
